@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>确认身份</title>
+
+    <!-- 1. 导入CSS的全局样式 -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- 2. jQuery导入，建议使用1.9以上的版本 -->
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <!-- 3. 导入bootstrap的js文件 -->
+    <!--<script src="js/bootstrap.min.js"></script>-->
+    <script type="text/javascript"></script>
+    <style>
+        #body {
+            background-image: url("images/树后白猫.jpg");
+            background-size: 100% 100%;
+            background-attachment: fixed;
+        }
+    </style>
+    <script>
+
+        // 确认身份
+        $(function () {
+            $("#submit").click(function () {
+                var username = $("#username").val();
+                var email = $("#email").val();
+                if (username == "") {
+                    alert("用户名为空~");
+                    return;
+                }
+                if (email == "") {
+                    alert("邮箱不能为空哦~");
+                    return;
+                }
+                $.ajax({
+                    url: "isExistByUsernameAndPasswordServlet",
+                    data: {"username":username, "email":email},
+                    type: "POST",
+                    dataType: "json",
+                    success: function (data) {
+                        console.log(data);
+                        if (data.msg === false) {
+                            alert("用户名或邮箱不正确~");
+                            return;
+                        }
+                        else {
+                            alert("确认成功~");
+                            window.location.href = "resetPassword.html?username="+username;
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body id="body">
+<div class="container" style="width: 400px;margin-top: 120px;background-color: rgba(255,255,255,0.8)">
+    <h3 style="text-align: center;">确认身份</h3>
+    <!--        <form action="login" method="post">-->
+    <div class="form-group">
+        <label for="username">用户名：</label>
+        <input type="text" name="username" class="form-control" id="username" placeholder="请输入用户名"/>
+    </div>
+    <div class="form-group">
+        <label for="email">邮箱：</label>
+        <input type="email" name="email" class="form-control" id="email" placeholder="请输入邮箱"/>
+    </div>
+    <div class="form-group" style="text-align: center;"><!--class="form-group"-->
+        <input style="width: 170px;height: 40px" id="submit" class="btn btn btn-primary" type="button" value="确认">
+    </div>
+</div>
+</body>
+</html>

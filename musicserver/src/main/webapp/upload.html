@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>上传音乐</title>
+    <style>
+        #body {
+            background-image: url("images/雪中仰头.jpg");
+            background-size: 100% 100%;
+            background-attachment: fixed;
+        }
+    </style>
+</head>
+<body id="body">
+
+<!--enctype="multipart/form-data"-->
+<form  method="POST" enctype="multipart/form-data" action="upload">
+    文件上传：<input type="file" name="filename"/>
+    歌手名: <label>
+    <input type="text" name="singer" placeholder="请输入歌手名"/>
+    </label>
+    <input type="submit" value="上传"/>
+    <!--<table>
+        <tr>
+            <td>文件上传:</td>
+            <td><input type="file" name="filename"/></td>
+            <td>歌手名:</td>
+            <td><input type="text" name="singer" placeholder="请输入歌手名"/></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="上传"/></td>
+        </tr>
+    </table>-->
+</form>
+</body>
+</html>
